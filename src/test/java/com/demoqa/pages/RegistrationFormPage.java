@@ -1,4 +1,4 @@
-package demoqa.tests.pages;
+package com.demoqa.pages;
 
 import com.codeborne.selenide.SelenideElement;
 import com.demoqa.pages.components.CalendarComponent;

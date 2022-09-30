@@ -1,4 +1,4 @@
-package demoqa.tests.pages.components;
+package com.demoqa.pages.components;
 
 import static com.codeborne.selenide.Selenide.$;
 
@@ -10,6 +10,4 @@ public class CalendarComponent {
         $(".react-datepicker__day--0" + day + ":not(.react-datepicker__day--outside-month)").click();
         return this;
     }
-
-
 }

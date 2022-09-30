@@ -1,11 +1,11 @@
-package com.demoqa;
+package com.demoqa.tests;
 
 import com.codeborne.selenide.Configuration;
 import com.demoqa.pages.RegistrationFormPage;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 
-public class TestStudentRegistrationForm {
+public class TestStudentRegistrationForm extends TestData {
 
     RegistrationFormPage registrationFormPage = new RegistrationFormPage();
 
@@ -19,29 +19,47 @@ public class TestStudentRegistrationForm {
     @Test
     void fillFormTest() {
         registrationFormPage.openPage()
-          .setFirstName("Ivan")
-          .setLastName("Ivanov")
-          .setEmail("Ivan@gmail.com")
-          .setGender("Male")
-          .setNumber("1478521478")
-          .setBirthDate("21", "July", "1994")
-          .setSubjects("Maths")
-          .setHobbie("Sports")
-          .pictureUpload("image.jpg")
-          .setCurrentAddress("Kaliningrad")
-          .setStateAndCity("Haryana", "Panipat")
+          .setFirstName(firstName)
+          .setLastName(lastName)
+          .setEmail(email)
+          .setGender(gender)
+          .setNumber(number)
+          .setBirthDate(day, month, year)
+          .setSubjects(subject)
+          .setHobbie(hobby)
+          .pictureUpload(picture)
+          .setCurrentAddress(address)
+          .setStateAndCity(state, city)
           .clickSubmit();
 
         registrationFormPage
           .checkResultsTableVisible()
-          .checkResult("Student Email", "Ivan@gmail.com")
-          .checkResult("Gender", "Male")
-          .checkResult("Mobile", "1478521478")
-          .checkResult("Date of Birth", "21 July,1994")
-          .checkResult("Subjects", "Maths")
-          .checkResult("Hobbies", "Sports")
-          .checkResult("Picture", "image.jpg")
-          .checkResult("Address", "Kaliningrad")
-          .checkResult("State and City", "Haryana Panipat");
+          .checkResult("Student Name", firstName + " " + lastName)
+          .checkResult("Student Email", email)
+          .checkResult("Gender", gender)
+          .checkResult("Mobile", number)
+          .checkResult("Date of Birth", day + " " + month + "," + year )
+          .checkResult("Subjects", subject)
+          .checkResult("Hobbies", hobby)
+          .checkResult("Picture", picture)
+          .checkResult("Address", address)
+          .checkResult("State and City", state + " " + city);
+    }
+
+    @Test
+    void fillFormWithMunimumTest() {
+        registrationFormPage.openPage()
+          .setFirstName(firstName)
+          .setLastName(lastName)
+          .setEmail(email)
+          .setGender(gender)
+          .setNumber(number)
+          .clickSubmit();
+
+        registrationFormPage.checkResultsTableVisible()
+          .checkResult("Student Name", firstName + " " + lastName)
+          .checkResult("Student Email", email)
+          .checkResult("Gender", gender)
+          .checkResult("Mobile", number);
     }
 }
